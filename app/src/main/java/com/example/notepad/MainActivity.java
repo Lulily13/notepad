@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private NoteAdapter adapter;
     private NoteDao noteDao;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        Button deleteAllButton = findViewById(R.id.deleteAllButton);
+
+        deleteAllButton.setOnClickListener(v -> {
+            new android.app.AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Confirm Deletion")
+                    .setMessage("Are you sure you want to delete all notes?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        NoteDatabase.databaseWriteExecutor.execute(() -> {
+                            noteDao.deleteAll();
+                            Log.d("NOTE_APP", "All notes deleted from database");
+                        });
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
     }
 }
-
