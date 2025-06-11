@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">notepad</string>
+    <string name="delete">Delete</string>
+    <string name="example_note">Example note</string>
+    <string name="type_your_note">Type your note</string>
+    <string name="add_new_note">Add new note</string>
 </resources>
